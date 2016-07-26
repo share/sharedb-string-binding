@@ -1,0 +1,31 @@
+{
+  "name": "sharedb-string-binding",
+  "version": "1.0.0",
+  "description": "Two-way bind json0 string operations in a ShareDB doc to an HTML text input or textarea",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/share/sharedb-string-binding.git"
+  },
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "test": "node_modules/.bin/mocha && npm run lint",
+    "test-cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha && npm run lint"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.9",
+    "eslint": "^2.13.0",
+    "eslint-config-xo": "^0.14.1",
+    "expect.js": "^0.3.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3",
+    "sharedb": "^1.0.0-beta"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "author": "Nate Smith",
+  "license": "MIT",
+  "dependencies": {
+    "text-diff-binding": "^1.0.0"
+  }
+}
