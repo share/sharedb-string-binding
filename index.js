@@ -25,8 +25,15 @@ StringBinding.prototype.destroy = function() {
 
 StringBinding.prototype.attachElement = function() {
   var binding = this;
-  this._inputListener = function() {
+  this._isEditing = null;
+  var propagate = function(){
     binding.onInput();
+  };
+  this._inputListener = function() {
+    if (this._isEditing){
+      clearTimeout(this._isEditing);
+    }
+    this._isEditing = setTimeout(propagate, 300);
   };
   this.element.addEventListener('input', this._inputListener, false);
 };
