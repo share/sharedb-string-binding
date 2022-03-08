@@ -47,19 +47,18 @@ StringBinding.prototype.detachDoc = function() {
   this.doc.removeListener('op', this._opListener);
 };
 
-StringBinding.prototype._onOp = function(op, source) {
+StringBinding.prototype._onOp = function(ops, source) {
   if (source === this) return;
-  if (op.length === 0) return;
-  if (op.length > 1) {
-    throw new Error('Op with multiple components emitted');
-  }
-  var component = op[0];
-  if (isSubpath(this.path, component.p)) {
-    this._parseInsertOp(component);
-    this._parseRemoveOp(component);
-  } else if (isSubpath(component.p, this.path)) {
-    this._parseParentOp();
-  }
+  if (ops.length === 0) return;
+
+  ops.forEach(function (component) {
+    if (isSubpath(this.path, component.p)) {
+      this._parseInsertOp(component);
+      this._parseRemoveOp(component);
+    } else if (isSubpath(component.p, this.path)) {
+      this._parseParentOp();
+    }
+  });
 };
 
 StringBinding.prototype._parseInsertOp = function(component) {
